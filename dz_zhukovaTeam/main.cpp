@@ -8,13 +8,13 @@
 void run(const std::string& name, CoinChangeFunc func) {
     for (size_t i = 0; i < tests.size(); ++i) {
         auto start = std::chrono::steady_clock::now();
-        std::map<int, int> result = func(tests[i].coins, tests[i].amount);
+        std::map<int, int> result = func(tests[i].coins, tests[i].target_sum);
         auto end = std::chrono::steady_clock::now();
 
         double ms = std::chrono::duration<double, std::milli>(end - start).count();
         std::cout << name << " тест " << i + 1 << " | " << ms << " ms | ";
 
-        if (result.empty() && tests[i].amount > 0) {
+        if (result.empty() && tests[i].target_sum > 0) {
             std::cout << "сумму набрать нельзя\n";
             continue;
         }
