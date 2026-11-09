@@ -9,10 +9,19 @@ struct TestCase {
     std::map<int, int> coins;
 };
 
+std::vector<std::string> testPaths = {
+    // Ваши пути к тестовым данным
+    "test/Mirzabalaev_average.txt",
+    "test/Mirzabalaev_best.txt",
+    "test/Mirzabalaev_worst.txt",
+};
+
+
 TestCase readTestCase(const std::string& filepath) {
+    // Считывает тестовый пример из одного файла
     // Формат файла:
     // В первой строчке целевая сумма
-    // В следующих строчках "количество номинал"
+    // В следующих строчках "номинал количество"
     // Пример: 
     // 15
     // 4 3  (3 монеты по 4 рубля)
@@ -44,7 +53,16 @@ TestCase readTestCase(const std::string& filepath) {
     return { target_sum, coins };
 }
 
+std::vector<TestCase> readAllTestCases() {
+    // Читает все тесты из testPaths и возвращать вектор из TestCase
+    std::vector<TestCase> result {};
+    result.reserve(testPaths.size());
+    
+    for (const auto& path : testPaths) {
+        result.push_back(readTestCase(path));
+    }
 
-inline std::vector<TestCase> tests = {
-    // Ваши тестовые данные,
-};
+    return result;
+}
+
+
